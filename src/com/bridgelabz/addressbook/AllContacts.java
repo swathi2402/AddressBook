@@ -16,8 +16,4 @@ public class AllContacts {
 	public void setAllContacts(List<Contact> allContacts) {
 		this.allContacts = allContacts;
 	}
-
-	public static void main(String[] args) {
-		
-	}
 }
