@@ -6,8 +6,8 @@ public class AddressBook {
 
 	public static void main(String[] args) {
 		System.out.println("***** Welcome to Address Book Program *****");
-
-		System.out.println("Press '1' to add, Press '2' to edit contact");
+		
+		System.out.println("Press '1' to add contact\nPress '2' to edit contact\nPress '3' to delete contact");
 		Scanner scanner = new Scanner(System.in);
 		int optionSelected = scanner.nextInt();
 
@@ -18,6 +18,8 @@ public class AddressBook {
 		case 2:
 			EditContact.checkToEdit();
 			break;
+		case 3:
+			DeleteContact.checkToDelete();
 		}
 
 	}
