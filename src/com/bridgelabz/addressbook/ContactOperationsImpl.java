@@ -61,9 +61,40 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		String ZIP = scanner.next();
 		String phoneNumber = scanner.next();
 		String email = scanner.next();
-		
 		contact[count] = new Contact (name, lastName, address, city, state, ZIP, phoneNumber, email);
 		System.out.println("Contact of " + contact[count].getFirstName() + " has bee edited");
+	}
+
+
+	@Override
+	public void checkToDelete() {
+		addContact();
+		boolean isValid = false;
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the First Name of the contact to be delete:");
+		String firstName = scanner.next();
+		for (int index = 0; index < count; index++) {
+			String name = contact[index].getFirstName();
+			if (firstName.equals(name)) {
+				deleteContact(name, index);
+				isValid = true;
+				break;
+			}
+		}
+		if (!isValid) {
+			System.out.print("Enter valid name");
+		}
+	}
+
+
+	private void deleteContact(String name, int index) {
+		System.out.println("Hi");
+		for (int c = 0; c < count; c++) {
+			contact[index] = contact[index + 1];
+		}
+		count--;
+		System.out.println("Contact of " + name + " has bee deleted");
+		System.out.println(count);
 	}
 
 }
