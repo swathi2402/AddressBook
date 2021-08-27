@@ -6,13 +6,13 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	public int count = 0;
 	Contact[] contact = new Contact[100];
+	Scanner scanner = new Scanner(System.in);
 
 	@Override
 	public void addContact() {
 		System.out.println(
 				"Enter details in the order First Name, Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 
-		Scanner scanner = new Scanner(System.in);
 		String firstName = scanner.next();
 		String lastName = scanner.next();
 		String address = scanner.next();
@@ -34,7 +34,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 			System.out.print("Address book is empty to edit");
 		} else {
 			boolean isValid = false;
-			Scanner scanner = new Scanner(System.in);
 			System.out.println("Enter the First Name of the contact to be edit:");
 			String firstName = scanner.next();
 			for (int index = 0; index < count; index++) {
@@ -55,7 +54,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		System.out.println(
 				"Enter details in the order Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 
-		Scanner scanner = new Scanner(System.in);
 		String lastName = scanner.next();
 		String address = scanner.next();
 		String city = scanner.next();
@@ -73,7 +71,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 			System.out.print("Address book is empty to delete");
 		} else {
 			boolean isValid = false;
-			Scanner scanner = new Scanner(System.in);
 			System.out.println("Enter the First Name of the contact to be delete:");
 			String firstName = scanner.next();
 			for (int index = 0; index < count; index++) {

@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class AddressBook {
 	public static void main(String[] args) {
 		System.out.println("***** Welcome to Address Book Program *****");
+		
 		boolean exit = false;
 		ContactOperationsIF contactOperations = new ContactOperationsImpl();
+		
 		while(!exit) {
 			System.out.println("Press:\n1 to Add contact \n2 to Edit contact \n3 to Delete \n4 to Exit");
 			Scanner scanner = new Scanner(System.in);
