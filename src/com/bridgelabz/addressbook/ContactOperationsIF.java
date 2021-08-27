@@ -5,4 +5,6 @@ public interface ContactOperationsIF {
 
 	public void checkToEdit();
 
+	public void checkToDelete();
+
 }
