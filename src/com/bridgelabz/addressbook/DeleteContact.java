@@ -9,7 +9,6 @@ public class DeleteContact {
 			Contact deletedContact = contactObject.getAllContact().getAllContacts().get(index);
 			System.out.print("Contact of " + deletedContact.getFirstName() + " has been deleted");
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e);
 		}
 	}

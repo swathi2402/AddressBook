@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class AddContact {
 	public static void addContact() {
 
-		System.out.println("Enter details in the order Lsat Name, Address, City, State, "
-				+ "Pincode, Phone Number, Email Address");
+		System.out.println(
+				"Enter details in the order Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 
 		Scanner scanner = new Scanner(System.in);
 		String firstName = scanner.next();
