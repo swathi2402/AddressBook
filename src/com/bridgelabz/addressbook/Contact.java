@@ -3,6 +3,12 @@ package com.bridgelabz.addressbook;
 public class Contact {
 	
 	private String firstName;
+	@Override
+	public String toString() {
+		return "Contact [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city=" + city
+				+ ", state=" + state + ", ZIP=" + ZIP + ", phoneNumber=" + phoneNumber + ", email=" + email + "]";
+	}
+
 	private String lastName;
 	private String address;
 	private String city;
