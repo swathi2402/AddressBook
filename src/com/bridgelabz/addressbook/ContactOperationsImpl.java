@@ -61,7 +61,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		String ZIP = scanner.next();
 		String phoneNumber = scanner.next();
 		String email = scanner.next();
-		
 		contact[count] = new Contact (name, lastName, address, city, state, ZIP, phoneNumber, email);
 		System.out.println("Contact of " + contact[count].getFirstName() + " has bee edited");
 	}
@@ -89,8 +88,13 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 
 	private void deleteContact(String name, int index) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Hi");
+		for (int c = 0; c < count; c++) {
+			contact[index] = contact[index + 1];
+		}
+		count--;
+		System.out.println("Contact of " + name + " has bee deleted");
+		System.out.println(count);
 	}
 
 }
