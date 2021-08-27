@@ -29,4 +29,11 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		count++;
 	}
 
+
+	@Override
+	public void checkToEdit() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
