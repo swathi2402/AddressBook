@@ -24,7 +24,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		String email = scanner.next();
 
 		contact[count] = new Contact (firstName, lastName, address, city, state, ZIP, phoneNumber, email);	
-//		System.out.println(contact[count]);
 		System.out.println("Contact of " + contact[count].getFirstName() + " " + contact[count].getLastName() + " has bee added");
 		count++;
 	}
@@ -32,8 +31,39 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	@Override
 	public void checkToEdit() {
-		// TODO Auto-generated method stub
+		addContact();
+		boolean isValid = false;
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter the First Name of the contact to be edit:");
+		String firstName = scanner.next();
+		for (int index = 0; index < count; index++) {
+			String name = contact[index].getFirstName();
+			if (firstName.equals(name)) {
+				editContact(name, index);
+				isValid = true;
+				break;
+			}
+		}
+		if (!isValid) {
+			System.out.print("Enter valid name");
+		}
+	}
+
+
+	private void editContact(String name, int index) {
+		System.out.println("Enter details in the order Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 		
+		Scanner scanner = new Scanner(System.in);
+		String lastName = scanner.next();
+		String address = scanner.next();
+		String city = scanner.next();
+		String state = scanner.next();
+		String ZIP = scanner.next();
+		String phoneNumber = scanner.next();
+		String email = scanner.next();
+		
+		contact[count] = new Contact (name, lastName, address, city, state, ZIP, phoneNumber, email);
+		System.out.println("Contact of " + contact[count].getFirstName() + " has bee edited");
 	}
 
 }
