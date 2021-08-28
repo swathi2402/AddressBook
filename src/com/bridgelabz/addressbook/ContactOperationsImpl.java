@@ -6,8 +6,8 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	public int count = 0;
 	public int addressCount = 0;
-	Contact[][] contacts = new Contact[2][2];
-	String[] addressBook = new String[2];
+	Contact[][] contacts = new Contact[10][10];
+	String[] addressBook = new String[10];
 	Scanner scanner = new Scanner(System.in);
 
 	public ContactOperationsImpl() {
@@ -52,15 +52,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 				break;
 			}
 
-		}
-	}
-
-	private void display() {
-		for (int i = 0; i < contacts.length; i++) {
-			for (int j = 0; j < contacts[i].length; j++) {
-				System.out.print(contacts[i][j].getFirstName());
-				System.out.println();
-			}
 		}
 	}
 
