@@ -2,6 +2,7 @@ package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -37,13 +38,22 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		String phoneNumber = scanner.next();
 		String email = scanner.next();
 
-		Contact newContact = new Contact(firstName, lastName, address, city, state, ZIP, phoneNumber, email);
-		boolean isAdded = addressBook.get(addressBookName).add(newContact);
-		if (isAdded) {
-			System.out.println("Contact for " + firstName + " " + lastName + " is added");
-		} else {
-			System.out.println("Contact for " + firstName + " " + lastName + " is already exists");
+		boolean isPresent = false;
+
+		for (int index = 0; index < addressBook.get(addressBookName).size(); index++) {
+			if (firstName.equals(addressBook.get(addressBookName).get(index).getFirstName())) {
+				System.out.println("Contact for " + firstName + " " + lastName + " is already exists");
+				isPresent = true;
+				break;
+			}
 		}
+		if (!isPresent) {
+			Contact newContact = new Contact(firstName, lastName, address, city, state, ZIP, phoneNumber, email);
+			addressBook.get(addressBookName).add(newContact);
+			System.out.println("Contact for " + firstName + " " + lastName + " is added");
+
+		}
+
 	}
 
 	@Override
