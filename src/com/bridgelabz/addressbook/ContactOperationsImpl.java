@@ -1,7 +1,10 @@
 package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -126,14 +129,8 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	@Override
 	public void SearchPerson(String nameToSearch) {
-//		for(int i = 0; i<addressBook.size(); i++) {
-//			keyname = addressBook.g
-//			for(int j = 0; j < addressBook.)
-//		}
 
 		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
-			boolean isPresent = false;
-//			int index = entry.getValue().size();
 
 			for (int index = 0; index < entry.getValue().size(); index++) {
 				if (nameToSearch.equals(entry.getValue().get(index).getFirstName())) {
@@ -141,26 +138,46 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 					System.out.println("Person Name: " + entry.getValue().get(index).getFirstName());
 					System.out.println("State: " + entry.getValue().get(index).getState());
 					System.out.println("City: " + entry.getValue().get(index).getCity());
-				} else {
+				} else
 					System.out.println("No Such person exits in addressbook " + entry.getKey());
-				}
+
 			}
-//			while (!isPresent) {
-//				if (!nameToSearch.equals(entry.getValue().get(index).getFirstName())) {
-//					
-//				} else {
-//					
-//				}
-//			}
-//		}
-//
-//		for (String contacts : addressBook.keySet()) {
-//			System.out.println("Address Book name: " + contacts);
-//		}
-//
-////		for (List<Contact> contacts : addressBook.values()) {
-//////			int max = addressBook.  
-////			if(contacts); }
 		}
+	}
+
+	@Override
+	public void getPersonsInCity(String city) {
+		Dictionary<String, String> personsInCity = new Hashtable<String, String>();
+		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
+
+			for (int index = 0; index < entry.getValue().size(); index++) {
+				if (city.equals(entry.getValue().get(index).getCity())) 
+					personsInCity.put(entry.getValue().get(index).getFirstName(), entry.getValue().get(index).getCity());				
+				
+			}
+		}
+		System.out.println("Persons in city " + city + " :");
+		for (Enumeration<String> personName = personsInCity.elements(); personName.hasMoreElements();)
+        {
+            System.out.println(personName.nextElement());
+        }
+	}
+
+	@Override
+	public void getPersonsInState(String state) {
+		Dictionary<String, String> personsInState = new Hashtable<String, String>();
+		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
+
+			for (int index = 0; index < entry.getValue().size(); index++) {
+				if (state.equals(entry.getValue().get(index).getCity())) 
+					personsInState.put(entry.getValue().get(index).getFirstName(), entry.getValue().get(index).getCity());				
+				
+			}
+		}
+		System.out.println("Persons in state " + state + " :");
+		for (Enumeration<String> personName = personsInState.elements(); personName.hasMoreElements();)
+        {
+            System.out.println(personName.nextElement());
+        }
 	}
 }
