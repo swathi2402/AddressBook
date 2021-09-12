@@ -1,62 +1,30 @@
 package com.bridgelabz.addressbook;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ContactOperationsImpl implements ContactOperationsIF {
 
-	public int count = 0;
-	public int addressCount = 0;
-	Contact[][] contacts = new Contact[10][10];
-	String[] addressBook = new String[10];
 	Scanner scanner = new Scanner(System.in);
+	private Map<String, List<Contact>> addressBook = new HashMap<String, List<Contact>>();
 
-	public ContactOperationsImpl() {
-		boolean exitAddressBook = false;
-		while (!exitAddressBook) {
-			System.out.println("Press:\n1 to Add AddressBook name \n2 to Exit");
-			int options = scanner.nextInt();
-
-			switch (options) {
-			case 1:
-				System.out.println("Enter name for Address Book");
-				String addressBookName = scanner.next();
-				addressBook[addressCount] = new String(addressBookName);
-				addressCount++;
-
-				boolean exitContact = false;
-				while(!exitContact) {
-					System.out.println("Press:\n1 to Add contact \n2 to Edit contact \n3 to Delete \n4 to Exit");
-					int optionSelected = scanner.nextInt();
-					
-					switch(optionSelected) {
-					case 1:
-						addContact();
-						break;
-					case 2:
-						checkToEdit();
-						break;
-					case 3:
-						checkToDelete();
-						break;
-					case 4:
-						System.out.println("Exiting Contacts");
-						exitContact = true;
-						break;
-					}
-				}
-				break;
-			case 2:
-				System.out.println("Exiting Address Book");
-				exitAddressBook = true;
-				scanner.close();
-				break;
-			}
-
+	public void addAddressBook(String addressBookName) {
+		if (addressBook.containsKey(addressBookName)) {
+			System.out.println(addressBookName + " Address Book alredy exists");
+			return;
+		} else {
+			System.out.println(addressBookName + " Address Book created");
+			addressBook.put(addressBookName, new ArrayList<Contact>());
 		}
+		System.out.println(addressBook);
 	}
 
 	@Override
-	public void addContact() {
+	public void addContact(String addressBookName) {
+
 		System.out.println(
 				"Enter details in the order First Name, Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 
@@ -69,24 +37,29 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		String phoneNumber = scanner.next();
 		String email = scanner.next();
 
-		contacts[addressCount][count] = new Contact(firstName, lastName, address, city, state, ZIP, phoneNumber, email);
-		System.out.println("Contact of " + contacts[addressCount][count].getFirstName() + " "
-				+ contacts[addressCount][count].getLastName() + " has been added");
-		count++;
+		Contact newContact = new Contact(firstName, lastName, address, city, state, ZIP, phoneNumber, email);
+		boolean isAdded = addressBook.get(addressBookName).add(newContact);
+		if (isAdded) {
+			System.out.println("Contact for " + firstName + " " + lastName + " is added");
+		} else {
+			System.out.println("Contact for " + firstName + " " + lastName + " is already exists");
+		}
 	}
 
 	@Override
-	public void checkToEdit() {
-		if (count < 0) {
+	public void checkToEdit(String addressBookName) {
+
+		if (addressBook.get(addressBookName).isEmpty()) {
 			System.out.print("Address book is empty to edit");
 		} else {
 			boolean isValid = false;
 			System.out.println("Enter the First Name of the contact to be edit:");
 			String firstName = scanner.next();
-			for (int index = 0; index < count; index++) {
-				String name = contacts[addressCount][index].getFirstName();
+			int size = addressBook.get(addressBookName).size();
+			for (int index = 0; index < size; index++) {
+				String name = addressBook.get(addressBookName).get(index).getFirstName();
 				if (firstName.equals(name)) {
-					editContact(name, index);
+					editContact(addressBookName, name, index);
 					isValid = true;
 					break;
 				}
@@ -97,7 +70,8 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		}
 	}
 
-	private void editContact(String name, int index) {
+	private void editContact(String addressBookName, String name, int index) {
+
 		System.out.println(
 				"Enter details in the order Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 
@@ -108,38 +82,36 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		String ZIP = scanner.next();
 		String phoneNumber = scanner.next();
 		String email = scanner.next();
-		contacts[addressCount][count] = new Contact(name, lastName, address, city, state, ZIP, phoneNumber, email);
-		System.out.println("Contact of " + contacts[addressCount][count].getFirstName() + " has been edited");
+
+		addressBook.get(addressBookName).remove(index);
+		Contact contactToBeEdit = new Contact(name, lastName, address, city, state, ZIP, phoneNumber, email);
+		addressBook.get(addressBookName).add(contactToBeEdit);
+		System.out.println("Contact of " + name + " has been edited");
 	}
 
 	@Override
-	public void checkToDelete() {
-		if (count < 0) {
+	public void deleteContact(String addressBookName) {
+
+		if (addressBook.get(addressBookName).isEmpty()) {
 			System.out.print("Address book is empty to delete");
 		} else {
 			boolean isValid = false;
 			System.out.println("Enter the First Name of the contact to be delete:");
 			String firstName = scanner.next();
-			for (int index = 0; index < count; index++) {
-				String name = contacts[addressCount][index].getFirstName();
+			int size = addressBook.get(addressBookName).size();
+			for (int index = 0; index < size; index++) {
+				String name = addressBook.get(addressBookName).get(index).getFirstName();
 				if (firstName.equals(name)) {
-					deleteContact(name, index);
+					Contact deletedContact = addressBook.get(addressBookName).remove(index);
+					System.out.println("Contact of " + deletedContact.getFirstName() + " has been deleted");
 					isValid = true;
 					break;
 				}
 			}
 			if (!isValid) {
-				System.out.print("Enter valid name");
+				System.out.println("Enter valid name");
 			}
 		}
-	}
-
-	private void deleteContact(String name, int index) {
-		for (int c = 0; c < count; c++) {
-			contacts[index] = contacts[index + 1];
-		}
-		count--;
-		System.out.println("Contact of " + name + " has been deleted");
 	}
 
 }

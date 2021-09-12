@@ -1,10 +1,12 @@
 package com.bridgelabz.addressbook;
 
 public interface ContactOperationsIF {
-	public void addContact();
 
-	public void checkToEdit();
-
-	public void checkToDelete();
+	public void addAddressBook(String addressBookName);
+	public void addContact(String addressBookName);
+//
+	public void checkToEdit(String addressBookName);
+//
+	public void deleteContact(String addressBookName);
 
 }
