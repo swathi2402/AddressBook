@@ -2,9 +2,9 @@ package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class ContactOperationsImpl implements ContactOperationsIF {
@@ -124,4 +124,43 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		}
 	}
 
+	@Override
+	public void SearchPerson(String nameToSearch) {
+//		for(int i = 0; i<addressBook.size(); i++) {
+//			keyname = addressBook.g
+//			for(int j = 0; j < addressBook.)
+//		}
+
+		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
+			boolean isPresent = false;
+//			int index = entry.getValue().size();
+
+			for (int index = 0; index < entry.getValue().size(); index++) {
+				if (nameToSearch.equals(entry.getValue().get(index).getFirstName())) {
+					System.out.println("Address Book name: " + entry.getKey());
+					System.out.println("Person Name: " + entry.getValue().get(index).getFirstName());
+					System.out.println("State: " + entry.getValue().get(index).getState());
+					System.out.println("City: " + entry.getValue().get(index).getCity());
+				} else {
+					System.out.println("No Such person exits in addressbook " + entry.getKey());
+				}
+			}
+//			while (!isPresent) {
+//				if (!nameToSearch.equals(entry.getValue().get(index).getFirstName())) {
+//					
+//				} else {
+//					
+//				}
+//			}
+//		}
+//
+//		for (String contacts : addressBook.keySet()) {
+//			System.out.println("Address Book name: " + contacts);
+//		}
+//
+////		for (List<Contact> contacts : addressBook.values()) {
+//////			int max = addressBook.  
+////			if(contacts); }
+		}
+	}
 }

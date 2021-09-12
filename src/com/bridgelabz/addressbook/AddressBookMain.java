@@ -11,9 +11,9 @@ public class AddressBookMain {
 		Scanner scanner = new Scanner(System.in);
 
 		boolean exitAddressBook = false;
-		
+
 		while (!exitAddressBook) {
-			System.out.println("Press:\n1 to Add new AddressBook \n2 to Exit");
+			System.out.println("Press:\n1 to Add new AddressBook \n2 to Search a Person \n3 to Exit");
 			int options = scanner.nextInt();
 
 			switch (options) {
@@ -44,7 +44,13 @@ public class AddressBookMain {
 					}
 				}
 				break;
+				
 			case 2:
+				System.out.println("Enter first name of the person to search");
+				String nameToSearch = scanner.next();
+				contactOperations.SearchPerson(nameToSearch);
+				
+			case 3:
 				System.out.println("Exiting Address Book");
 				exitAddressBook = true;
 				scanner.close();
