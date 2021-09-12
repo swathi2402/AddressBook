@@ -13,7 +13,8 @@ public class AddressBookMain {
 		boolean exitAddressBook = false;
 
 		while (!exitAddressBook) {
-			System.out.println("Press:\n1 to Add new AddressBook \n2 to Search a Person \n3 to get persons by city \n4 to Exit");
+			System.out.println(
+					"Press:\n1 to Add new AddressBook \n2 to Search a Person \n3 to get persons by city \n4 to Exit");
 			int options = scanner.nextInt();
 
 			switch (options) {
@@ -44,23 +45,23 @@ public class AddressBookMain {
 					}
 				}
 				break;
-				
+
 			case 2:
 				System.out.println("Enter first name of the person to search");
 				String nameToSearch = scanner.next();
 				contactOperations.SearchPerson(nameToSearch);
 				break;
-				
+
 			case 3:
 				System.out.println("Enter name of the city");
 				String city = scanner.next();
 				contactOperations.getPersonsInCity(city);
-				
-				System.out.println("Enter name of the city");
+
+				System.out.println("Enter name of the state");
 				String state = scanner.next();
 				contactOperations.getPersonsInState(state);
 				break;
-				
+
 			case 4:
 				System.out.println("Exiting Address Book");
 				exitAddressBook = true;

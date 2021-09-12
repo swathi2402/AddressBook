@@ -23,7 +23,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 			System.out.println(addressBookName + " Address Book created");
 			addressBook.put(addressBookName, new ArrayList<Contact>());
 		}
-		System.out.println(addressBook);
 	}
 
 	@Override
@@ -151,16 +150,17 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
 
 			for (int index = 0; index < entry.getValue().size(); index++) {
-				if (city.equals(entry.getValue().get(index).getCity())) 
-					personsInCity.put(entry.getValue().get(index).getFirstName(), entry.getValue().get(index).getCity());				
-				
+				if (city.equals(entry.getValue().get(index).getCity()))
+					personsInCity.put(entry.getValue().get(index).getFirstName(),
+							entry.getValue().get(index).getCity());
+
 			}
 		}
 		System.out.println("Persons in city " + city + " :");
-		for (Enumeration<String> personName = personsInCity.elements(); personName.hasMoreElements();)
-        {
-            System.out.println(personName.nextElement());
-        }
+		for (Enumeration<String> personName = personsInCity.elements(); personName.hasMoreElements();) {
+			System.out.println(personName.nextElement());
+		}
+		System.out.println("Total count persons in " + city + " is: " + personsInCity.size());
 	}
 
 	@Override
@@ -169,15 +169,16 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
 
 			for (int index = 0; index < entry.getValue().size(); index++) {
-				if (state.equals(entry.getValue().get(index).getCity())) 
-					personsInState.put(entry.getValue().get(index).getFirstName(), entry.getValue().get(index).getCity());				
-				
+				if (state.equals(entry.getValue().get(index).getCity()))
+					personsInState.put(entry.getValue().get(index).getFirstName(),
+							entry.getValue().get(index).getCity());
+
 			}
 		}
 		System.out.println("Persons in state " + state + " :");
-		for (Enumeration<String> personName = personsInState.elements(); personName.hasMoreElements();)
-        {
-            System.out.println(personName.nextElement());
-        }
+		for (Enumeration<String> personName = personsInState.elements(); personName.hasMoreElements();) {
+			System.out.println(personName.nextElement());
+		}
+		System.out.println("Total count persons in " + state + " is: " + personsInState.size());
 	}
 }
