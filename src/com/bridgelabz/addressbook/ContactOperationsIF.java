@@ -12,4 +12,8 @@ public interface ContactOperationsIF {
 
 	public void SearchPerson(String nameToSearch);
 
+	public void getPersonsInCity(String city);
+
+	public void getPersonsInState(String state);
+
 }

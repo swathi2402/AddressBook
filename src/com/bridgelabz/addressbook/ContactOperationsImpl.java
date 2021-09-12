@@ -1,7 +1,10 @@
 package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -140,5 +143,41 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 			}
 		}
+	}
+
+	@Override
+	public void getPersonsInCity(String city) {
+		Dictionary<String, String> personsInCity = new Hashtable<String, String>();
+		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
+
+			for (int index = 0; index < entry.getValue().size(); index++) {
+				if (city.equals(entry.getValue().get(index).getCity())) 
+					personsInCity.put(entry.getValue().get(index).getFirstName(), entry.getValue().get(index).getCity());				
+				
+			}
+		}
+		System.out.println("Persons in city " + city + " :");
+		for (Enumeration<String> personName = personsInCity.elements(); personName.hasMoreElements();)
+        {
+            System.out.println(personName.nextElement());
+        }
+	}
+
+	@Override
+	public void getPersonsInState(String state) {
+		Dictionary<String, String> personsInState = new Hashtable<String, String>();
+		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
+
+			for (int index = 0; index < entry.getValue().size(); index++) {
+				if (state.equals(entry.getValue().get(index).getCity())) 
+					personsInState.put(entry.getValue().get(index).getFirstName(), entry.getValue().get(index).getCity());				
+				
+			}
+		}
+		System.out.println("Persons in state " + state + " :");
+		for (Enumeration<String> personName = personsInState.elements(); personName.hasMoreElements();)
+        {
+            System.out.println(personName.nextElement());
+        }
 	}
 }
