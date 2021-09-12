@@ -126,14 +126,8 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	@Override
 	public void SearchPerson(String nameToSearch) {
-//		for(int i = 0; i<addressBook.size(); i++) {
-//			keyname = addressBook.g
-//			for(int j = 0; j < addressBook.)
-//		}
 
 		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
-			boolean isPresent = false;
-//			int index = entry.getValue().size();
 
 			for (int index = 0; index < entry.getValue().size(); index++) {
 				if (nameToSearch.equals(entry.getValue().get(index).getFirstName())) {
@@ -141,26 +135,10 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 					System.out.println("Person Name: " + entry.getValue().get(index).getFirstName());
 					System.out.println("State: " + entry.getValue().get(index).getState());
 					System.out.println("City: " + entry.getValue().get(index).getCity());
-				} else {
+				} else
 					System.out.println("No Such person exits in addressbook " + entry.getKey());
-				}
+
 			}
-//			while (!isPresent) {
-//				if (!nameToSearch.equals(entry.getValue().get(index).getFirstName())) {
-//					
-//				} else {
-//					
-//				}
-//			}
-//		}
-//
-//		for (String contacts : addressBook.keySet()) {
-//			System.out.println("Address Book name: " + contacts);
-//		}
-//
-////		for (List<Contact> contacts : addressBook.values()) {
-//////			int max = addressBook.  
-////			if(contacts); }
 		}
 	}
 }
