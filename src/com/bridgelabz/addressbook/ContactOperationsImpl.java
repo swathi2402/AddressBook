@@ -31,20 +31,20 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		System.out.println(
 				"Enter details in the order First Name, Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 
-		String firstName = scanner.next();
-		String lastName = scanner.next();
-		String address = scanner.next();
-		String city = scanner.next();
-		String state = scanner.next();
-		String ZIP = scanner.next();
-		String phoneNumber = scanner.next();
-		String email = scanner.next();
+		String firstName = scanner.nextLine();
+		String lastName = scanner.nextLine();
+		String address = scanner.nextLine();
+		String city = scanner.nextLine();
+		String state = scanner.nextLine();
+		String ZIP = scanner.nextLine();
+		String phoneNumber = scanner.nextLine();
+		String email = scanner.nextLine();
 
 		boolean isPresent = false;
 
 		for (int index = 0; index < addressBook.get(addressBookName).size(); index++) {
 			if (firstName.equals(addressBook.get(addressBookName).get(index).getFirstName())) {
-				System.out.println("Contact for " + firstName + " " + lastName + " is already exists");
+				System.out.println("Contact for " + firstName + " " + " is already exists");
 				isPresent = true;
 				break;
 			}
@@ -87,13 +87,13 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		System.out.println(
 				"Enter details in the order Lsat Name, Address, City, State, Pincode, Phone Number, Email Address");
 
-		String lastName = scanner.next();
-		String address = scanner.next();
-		String city = scanner.next();
-		String state = scanner.next();
-		String ZIP = scanner.next();
-		String phoneNumber = scanner.next();
-		String email = scanner.next();
+		String lastName = scanner.nextLine();
+		String address = scanner.nextLine();
+		String city = scanner.nextLine();
+		String state = scanner.nextLine();
+		String ZIP = scanner.nextLine();
+		String phoneNumber = scanner.nextLine();
+		String email = scanner.nextLine();
 
 		addressBook.get(addressBookName).remove(index);
 		Contact contactToBeEdit = new Contact(name, lastName, address, city, state, ZIP, phoneNumber, email);
@@ -109,7 +109,7 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		} else {
 			boolean isValid = false;
 			System.out.println("Enter the First Name of the contact to be delete:");
-			String firstName = scanner.next();
+			String firstName = scanner.nextLine();
 			int size = addressBook.get(addressBookName).size();
 			for (int index = 0; index < size; index++) {
 				String name = addressBook.get(addressBookName).get(index).getFirstName();
