@@ -76,6 +76,7 @@ public class AddressBookMain {
 				System.out.println("Enter name of the AddressBook");
 				String bookName = scanner.next();
 				contactOperations.sortByName(bookName);
+				break;
 
 			case 6:
 				System.out.println("Exiting Address Book");
