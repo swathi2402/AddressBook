@@ -10,7 +10,7 @@ public interface ContactOperationsIF {
 
 	public void deleteContact(String addressBookName);
 
-	public void SearchPerson(String nameToSearch);
+	public void searchPerson(String nameToSearch);
 
 	public void getPersonsInCity(String city);
 

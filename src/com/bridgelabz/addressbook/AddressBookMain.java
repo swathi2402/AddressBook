@@ -49,7 +49,7 @@ public class AddressBookMain {
 			case 2:
 				System.out.println("Enter first name of the person to search");
 				String nameToSearch = scanner.next();
-				contactOperations.SearchPerson(nameToSearch);
+				contactOperations.searchPerson(nameToSearch);
 				break;
 
 			case 3:

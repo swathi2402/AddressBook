@@ -9,14 +9,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class ContactOperationsImpl implements ContactOperationsIF {
 
 	Scanner scanner = new Scanner(System.in);
 	private Map<String, List<Contact>> addressBook = new HashMap<String, List<Contact>>();
+	private Map<String, List<Contact>> personsInCity = new HashMap<String, List<Contact>>();
+	private Map<String, List<Contact>> personsInState = new HashMap<String, List<Contact>>();
 
 	public void addAddressBook(String addressBookName) {
-		if (addressBook.keySet().stream().anyMatch(n ->(n.equals(addressBookName)))) {
+		if (addressBook.keySet().stream().anyMatch(n -> (n.equals(addressBookName)))) {
 			System.out.println(addressBookName + " Address Book alredy exists");
 			return;
 		} else {
@@ -53,6 +56,16 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 			Contact newContact = new Contact(firstName, lastName, address, city, state, ZIP, phoneNumber, email);
 			addressBook.get(addressBookName).add(newContact);
 			System.out.println("Contact for " + firstName + " " + lastName + " is added");
+
+			if (personsInCity.get(city) == null) {
+				personsInCity.put(city, new ArrayList<Contact>());
+			}
+			personsInCity.get(city).add(newContact);
+
+			if (personsInState.get(state) == null) {
+				personsInState.put(state, new ArrayList<Contact>());
+			}
+			personsInState.get(state).add(newContact);
 
 		}
 
@@ -95,10 +108,24 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		String phoneNumber = scanner.nextLine();
 		String email = scanner.nextLine();
 
+		Contact contact = addressBook.get(addressBookName).get(index);
 		addressBook.get(addressBookName).remove(index);
 		Contact contactToBeEdit = new Contact(name, lastName, address, city, state, ZIP, phoneNumber, email);
 		addressBook.get(addressBookName).add(contactToBeEdit);
 		System.out.println("Contact of " + name + " has been edited");
+
+		personsInCity.get(contact.getCity()).remove(contact);
+		personsInState.get(contact.getState()).remove(contact);
+		if (personsInCity.get(city) == null) {
+			personsInCity.put(city, new ArrayList<Contact>());
+		}
+		personsInCity.get(city).add(contact);
+
+		if (personsInState.get(state) == null) {
+			personsInState.put(state, new ArrayList<Contact>());
+		}
+		personsInState.get(state).add(contact);
+
 	}
 
 	@Override
@@ -116,6 +143,9 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 				if (firstName.equals(name)) {
 					Contact deletedContact = addressBook.get(addressBookName).remove(index);
 					System.out.println("Contact of " + deletedContact.getFirstName() + " has been deleted");
+
+					personsInCity.get(deletedContact.getCity()).remove(deletedContact);
+					personsInState.get(deletedContact.getState()).remove(deletedContact);
 					isValid = true;
 					break;
 				}
@@ -127,7 +157,7 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 	}
 
 	@Override
-	public void SearchPerson(String nameToSearch) {
+	public void searchPerson(String nameToSearch) {
 
 		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
 
@@ -146,39 +176,22 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	@Override
 	public void getPersonsInCity(String city) {
-		Dictionary<String, String> personsInCity = new Hashtable<String, String>();
-		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
-
-			for (int index = 0; index < entry.getValue().size(); index++) {
-				if (city.equals(entry.getValue().get(index).getCity()))
-					personsInCity.put(entry.getValue().get(index).getFirstName(),
-							entry.getValue().get(index).getCity());
-
-			}
+		if (personsInCity.get(city) != null) {
+			System.out.println("Persons in city " + city + " :");
+			personsInCity.get(city).forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
+		} else {
+			System.out.println("There is no person in city " + city);
 		}
-		System.out.println("Persons in city " + city + " :");
-		for (Enumeration<String> personName = personsInCity.elements(); personName.hasMoreElements();) {
-			System.out.println(personName.nextElement());
-		}
-		System.out.println("Total count persons in " + city + " is: " + personsInCity.size());
+
 	}
 
 	@Override
 	public void getPersonsInState(String state) {
-		Dictionary<String, String> personsInState = new Hashtable<String, String>();
-		for (Entry<String, List<Contact>> entry : addressBook.entrySet()) {
-
-			for (int index = 0; index < entry.getValue().size(); index++) {
-				if (state.equals(entry.getValue().get(index).getCity()))
-					personsInState.put(entry.getValue().get(index).getFirstName(),
-							entry.getValue().get(index).getCity());
-
-			}
+		if (personsInState.get(state) != null) {
+			System.out.println("Persons in city " + state + " :");
+			personsInCity.get(state).forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
+		} else {
+			System.out.println("There is no person in city " + state);
 		}
-		System.out.println("Persons in state " + state + " :");
-		for (Enumeration<String> personName = personsInState.elements(); personName.hasMoreElements();) {
-			System.out.println(personName.nextElement());
-		}
-		System.out.println("Total count persons in " + state + " is: " + personsInState.size());
 	}
 }
