@@ -22,4 +22,8 @@ public interface ContactOperationsIF {
 
 	public void sortByName(String bookName);
 
+	public void sortByCity(String nameOfCity);
+
+	public void sortByState(String nameOfState);
+
 }

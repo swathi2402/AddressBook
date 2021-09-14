@@ -49,6 +49,7 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 				break;
 			}
 		}
+
 		if (!isPresent) {
 			Contact newContact = new Contact(firstName, lastName, address, city, state, ZIP, phoneNumber, email);
 			addressBook.get(addressBookName).add(newContact);
@@ -184,30 +185,55 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 	@Override
 	public void getPersonsInState(String state) {
 		if (personsInState.get(state) != null) {
-			System.out.println("Persons in city " + state + " :");
-			personsInCity.get(state).forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
+			System.out.println("Persons in state " + state + " :");
+			personsInState.get(state).forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
 		} else {
-			System.out.println("There is no person in city " + state);
+			System.out.println("There is no person in state " + state);
 		}
 	}
 
 	@Override
 	public void getCountInCity(String cityName) {
-		System.out.println("Total count persons in " + cityName + " is: " + personsInCity.get(cityName).size());
+		if (personsInCity.get(cityName) == null) {
+			System.out.println("Total count persons in " + cityName + " is: " + personsInCity.get(cityName).size());
+		} else {
+			System.out.println("No such city exists");
+		}
 	}
 
 	@Override
 	public void getCountInState(String stateName) {
-		System.out.println("Total count persons in " + stateName + " is: " + personsInCity.get(stateName).size());
+		if (personsInCity.get(stateName) == null) {
+			System.out.println("Total count persons in " + stateName + " is: " + personsInCity.get(stateName).size());
+		} else {
+			System.out.println("No such state exists");
+		}
 	}
 
 	@Override
 	public void sortByName(String bookName) {
 		List<Contact> contactArray = addressBook.get(bookName);
 		List<Contact> sortedNameList = contactArray.stream()
-							.sorted((s1, s2) -> s1.getFirstName().compareTo(s2.getFirstName()))
-							.collect(Collectors.toList());
+				.sorted((s1, s2) -> s1.getFirstName().compareTo(s2.getFirstName())).collect(Collectors.toList());
 		System.out.println("Persons in the AddressBook " + bookName + " in sorted order: ");
 		sortedNameList.stream().forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
+	}
+
+	@Override
+	public void sortByCity(String nameOfCity) {
+		List<Contact> contactArray = personsInCity.get(nameOfCity);
+		List<Contact> sortedCityList = contactArray.stream().sorted((s1, s2) -> (s1.getCity().compareTo(s2.getCity())))
+				.collect(Collectors.toList());
+		System.out.println("Persons in the City " + nameOfCity + " in sorted order: ");
+		sortedCityList.stream().forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
+	}
+
+	@Override
+	public void sortByState(String nameOfState) {
+		List<Contact> contactArray = personsInState.get(nameOfState);
+		List<Contact> sortedStateList = contactArray.stream()
+				.sorted((s1, s2) -> (s1.getState().compareTo(s2.getState()))).collect(Collectors.toList());
+		System.out.println("Persons in the State " + nameOfState + " in sorted order: ");
+		sortedStateList.stream().forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
 	}
 }
