@@ -16,7 +16,7 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 	private Map<String, List<Contact>> addressBook = new HashMap<String, List<Contact>>();
 
 	public void addAddressBook(String addressBookName) {
-		if (addressBook.containsKey(addressBookName)) {
+		if (addressBook.keySet().stream().anyMatch(n ->(n.equals(addressBookName)))) {
 			System.out.println(addressBookName + " Address Book alredy exists");
 			return;
 		} else {
