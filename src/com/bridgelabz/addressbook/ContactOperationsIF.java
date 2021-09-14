@@ -20,4 +20,6 @@ public interface ContactOperationsIF {
 
 	public void getCountInState(String stateName);
 
+	public void sortByName(String bookName);
+
 }

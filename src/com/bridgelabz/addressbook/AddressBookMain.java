@@ -14,7 +14,7 @@ public class AddressBookMain {
 
 		while (!exitAddressBook) {
 			System.out.println(
-					"Press:\n1 to Add new AddressBook \n2 to Search a Person \n3 to get persons by city \n4 to get count \n5 to Exit");
+					"Press:\n1 to Add new AddressBook \n2 to Search a Person \n3 to get persons by city and state \n4 to get count \n5 to display sort by name \n6 to Exit");
 			int options = scanner.nextInt();
 
 			switch (options) {
@@ -71,8 +71,13 @@ public class AddressBookMain {
 				String stateName = scanner.next();
 				contactOperations.getCountInState(stateName);
 				break;
-
+				
 			case 5:
+				System.out.println("Enter name of the AddressBook");
+				String bookName = scanner.next();
+				contactOperations.sortByName(bookName);
+
+			case 6:
 				System.out.println("Exiting Address Book");
 				exitAddressBook = true;
 				scanner.close();

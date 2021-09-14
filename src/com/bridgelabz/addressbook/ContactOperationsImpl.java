@@ -1,15 +1,12 @@
 package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ContactOperationsImpl implements ContactOperationsIF {
 
@@ -201,6 +198,16 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	@Override
 	public void getCountInState(String stateName) {
-		System.out.println("Total count persons in " + stateName + " is: " + personsInCity.get(stateName).size());	
+		System.out.println("Total count persons in " + stateName + " is: " + personsInCity.get(stateName).size());
+	}
+
+	@Override
+	public void sortByName(String bookName) {
+		List<Contact> contactArray = addressBook.get(bookName);
+		List<Contact> sortedNameList = contactArray.stream()
+							.sorted((s1, s2) -> s1.getFirstName().compareTo(s2.getFirstName()))
+							.collect(Collectors.toList());
+		System.out.println("Persons in the AddressBook " + bookName + " in sorted order: ");
+		sortedNameList.stream().forEach(n -> System.out.println(n.getFirstName() + " " + n.getLastName()));
 	}
 }
