@@ -182,7 +182,6 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		} else {
 			System.out.println("There is no person in city " + city);
 		}
-
 	}
 
 	@Override
@@ -193,5 +192,15 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		} else {
 			System.out.println("There is no person in city " + state);
 		}
+	}
+
+	@Override
+	public void getCountInCity(String cityName) {
+		System.out.println("Total count persons in " + cityName + " is: " + personsInCity.get(cityName).size());
+	}
+
+	@Override
+	public void getCountInState(String stateName) {
+		System.out.println("Total count persons in " + stateName + " is: " + personsInCity.get(stateName).size());	
 	}
 }

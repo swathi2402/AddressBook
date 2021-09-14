@@ -16,4 +16,8 @@ public interface ContactOperationsIF {
 
 	public void getPersonsInState(String state);
 
+	public void getCountInCity(String cityName);
+
+	public void getCountInState(String stateName);
+
 }
