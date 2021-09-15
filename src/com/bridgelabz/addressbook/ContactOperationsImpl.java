@@ -117,12 +117,12 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 		if (personsInCity.get(city) == null) {
 			personsInCity.put(city, new ArrayList<Contact>());
 		}
-		personsInCity.get(city).add(contact);
+		personsInCity.get(city).add(contactToBeEdit);
 
 		if (personsInState.get(state) == null) {
 			personsInState.put(state, new ArrayList<Contact>());
 		}
-		personsInState.get(state).add(contact);
+		personsInState.get(state).add(contactToBeEdit);
 
 	}
 
@@ -194,7 +194,7 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	@Override
 	public void getCountInCity(String cityName) {
-		if (personsInCity.get(cityName) == null) {
+		if (personsInCity.get(cityName) != null) {
 			System.out.println("Total count persons in " + cityName + " is: " + personsInCity.get(cityName).size());
 		} else {
 			System.out.println("No such city exists");
@@ -203,8 +203,8 @@ public class ContactOperationsImpl implements ContactOperationsIF {
 
 	@Override
 	public void getCountInState(String stateName) {
-		if (personsInCity.get(stateName) == null) {
-			System.out.println("Total count persons in " + stateName + " is: " + personsInCity.get(stateName).size());
+		if (personsInState.get(stateName) != null) {
+			System.out.println("Total count persons in " + stateName + " is: " + personsInState.get(stateName).size());
 		} else {
 			System.out.println("No such state exists");
 		}

@@ -86,6 +86,7 @@ public class AddressBookMain {
 				System.out.println("Enter name of the state");
 				String nameOfState = scanner.next();
 				contactOperations.sortByState(nameOfState);
+				break;
 
 			case 7:
 				System.out.println("Exiting Address Book");
